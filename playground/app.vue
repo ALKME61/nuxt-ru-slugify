@@ -1,6 +1,6 @@
 <template>
   <div>
-    {{ slug }}
+    {{ $slugify('hello! mir', '-') }}
   </div>
 </template>
 

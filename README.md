@@ -1,89 +1,141 @@
-<<<<<<< HEAD
 # nuxt-ru-slugify
-Nuxt module for transliterating Russian text into slugs or clean Latin strings
-=======
-<!--
-Get your module up and running quickly.
 
-Find and replace all on all files (CMD+SHIFT+F):
-- Name: My Module
-- Package name: my-module
-- Description: My new Nuxt module
--->
+> 🔤 Nuxt 3 & 4 module for generating URL-friendly slugs with **correct Russian (Cyrillic → Latin) transliteration**
 
-# My Module
+## ✨ Features
 
-[![npm version][npm-version-src]][npm-version-href]
-[![npm downloads][npm-downloads-src]][npm-downloads-href]
-[![License][license-src]][license-href]
-[![Nuxt][nuxt-src]][nuxt-href]
+* 🇷🇺 Accurate Cyrillic transliteration (no external deps)
+* ⚡ Works out of the box with Nuxt 3 **and Nuxt 4**
+* 🔌 Injected `$slugify` helper
+* 🧩 Auto-imported `useSlugify` composable
+* 🎯 Optional separator control
+* 🪶 Lightweight & dependency-free
 
-My new Nuxt module for doing amazing things.
+---
 
-- [✨ &nbsp;Release Notes](/CHANGELOG.md)
-<!-- - [🏀 Online playground](https://stackblitz.com/github/your-org/my-module?file=playground%2Fapp.vue) -->
-<!-- - [📖 &nbsp;Documentation](https://example.com) -->
-
-## Features
-
-<!-- Highlight some of the features your module provide here -->
-- ⛰ &nbsp;Foo
-- 🚠 &nbsp;Bar
-- 🌲 &nbsp;Baz
-
-## Quick Setup
-
-Install the module to your Nuxt application with one command:
+## 📦 Installation
 
 ```bash
-npx nuxt module add my-module
+npm i nuxt-ru-slugify
+# or
+yarn add nuxt-ru-slugify
 ```
 
-That's it! You can now use My Module in your Nuxt app ✨
+---
 
+## ⚙️ Setup
 
-## Contribution
+Add the module to your `nuxt.config.ts`:
 
-<details>
-  <summary>Local development</summary>
-  
-  ```bash
-  # Install dependencies
-  npm install
-  
-  # Generate type stubs
-  npm run dev:prepare
-  
-  # Develop with the playground
-  npm run dev
-  
-  # Build the playground
-  npm run dev:build
-  
-  # Run ESLint
-  npm run lint
-  
-  # Run Vitest
-  npm run test
-  npm run test:watch
-  
-  # Release new version
-  npm run release
-  ```
+```ts
+export default defineNuxtConfig({
+  modules: ['nuxt-ru-slugify']
+})
+```
 
-</details>
+---
 
+## 🚀 Usage
 
-<!-- Badges -->
-[npm-version-src]: https://img.shields.io/npm/v/my-module/latest.svg?style=flat&colorA=020420&colorB=00DC82
-[npm-version-href]: https://npmjs.com/package/my-module
+### 1. In templates
 
-[npm-downloads-src]: https://img.shields.io/npm/dm/my-module.svg?style=flat&colorA=020420&colorB=00DC82
-[npm-downloads-href]: https://npm.chart.dev/my-module
+```vue
+<template>
+  <div>
+    {{ $slugify('Привет мир!') }}
+  </div>
+</template>
+```
 
-[license-src]: https://img.shields.io/npm/l/my-module.svg?style=flat&colorA=020420&colorB=00DC82
-[license-href]: https://npmjs.com/package/my-module
+👉 Output:
 
-[nuxt-src]: https://img.shields.io/badge/Nuxt-020420?logo=nuxt
-[nuxt-href]: https://nuxt.com
->>>>>>> 460f8cc (Initial commit)
+```
+privet-mir
+```
+
+---
+
+### 2. In script (Composable)
+
+```ts
+<script setup lang="ts">
+const { slugify } = useSlugify()
+
+console.log(slugify('Тестовая строка'))
+</script>
+```
+
+---
+
+### 3. Custom separator
+
+```ts
+slugify('Привет мир!', '_')
+// privet_mir
+
+slugify('Привет мир!', '')
+// privetmir
+```
+
+---
+
+## 🧠 Behavior
+
+* Automatically lowercases input
+* Transliterates Cyrillic characters using built-in dictionary
+* Removes unsupported characters
+* Replaces non-alphanumeric sequences with a separator (if provided)
+* Trims leading and trailing separators
+
+---
+
+## ⚠️ Notes
+
+* If `text` is not a string, returns empty string
+* In development mode, shows a warning in console
+
+---
+
+## 🧩 How it works
+
+The module:
+
+* Registers `useSlugify()` as auto-import
+* Injects `$slugify` into Nuxt app via plugin
+
+---
+
+## 📌 Why this module?
+
+Most slugify solutions:
+
+* ❌ handle Cyrillic poorly
+* ❌ produce inconsistent transliteration
+* ❌ require extra configuration
+
+`nuxt-ru-slugify` provides:
+
+* ✅ predictable results
+* ✅ clean SEO-friendly URLs
+* ✅ zero-config setup
+
+---
+
+## 🛠 Development
+
+```bash
+npm install
+npm run dev
+```
+
+---
+
+## 📄 License
+
+MIT
+
+---
+
+## ⭐ Support
+
+If this project is useful — give it a ⭐ on GitHub 🙌

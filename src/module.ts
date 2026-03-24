@@ -1,4 +1,4 @@
-import { defineNuxtModule, addImports, createResolver } from '@nuxt/kit'
+import { defineNuxtModule, addImports, addPlugin, createResolver } from '@nuxt/kit'
 
 export default defineNuxtModule({
   meta: {
@@ -13,5 +13,6 @@ export default defineNuxtModule({
       name: 'useSlugify',
       from: resolver.resolve('./runtime/composables/useSlugify')
     })
+    addPlugin(resolver.resolve('./runtime/plugins/slugify'))
   }
 })
