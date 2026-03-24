@@ -4,15 +4,33 @@
   "description": "Nuxt module for transliterating Russian text into slugs or clean Latin strings",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ALKME61/nuxt-ru-slugify.git"
+    "url": "git+https://github.com/ALKME61/nuxt-ru-slugify.git"
   },
+  "bugs": {
+    "url": "https://github.com/ALKME61/nuxt-ru-slugify/issues"
+  },
+  "homepage": "https://github.com/ALKME61/nuxt-ru-slugify#readme",
   "license": "MIT",
   "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "nuxt",
+    "nuxt-module",
+    "slugify",
+    "slug",
+    "transliteration",
+    "cyrillic",
+    "russian",
+    "seo"
+  ],
   "exports": {
     ".": {
       "types": "./dist/types.d.mts",
       "import": "./dist/module.mjs"
-    }
+    },
+    "./package.json": "./package.json"
   },
   "main": "./dist/module.mjs",
   "typesVersions": {
@@ -34,6 +52,8 @@
     "dev:build": "nuxt build playground",
     "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxt prepare playground",
     "release": "npm run lint && npm run test && npm run prepack && changelogen --release && npm publish && git push --follow-tags",
+    "build": "nuxt-module-build",
+    "prepublishOnly": "npm run build",
     "lint": "eslint .",
     "test": "vitest run",
     "test:watch": "vitest watch",
