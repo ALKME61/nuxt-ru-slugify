@@ -37,7 +37,7 @@ export default defineNuxtConfig({
 
 ## 🚀 Usage
 
-### 1. In templates
+### 1. In templates(bug with type)
 
 ```vue
 <template>
@@ -55,7 +55,7 @@ privet-mir
 
 ---
 
-### 2. In script (Composable)
+### 2. In script (Composable)(Recommended)
 
 ```ts
 <script setup lang="ts">
@@ -75,6 +75,9 @@ slugify('Привет мир!', '_')
 
 slugify('Привет мир!', '')
 // privetmir
+
+slugify('Привет мир!')
+// privet mir!
 ```
 
 ---
