@@ -1,11 +1,11 @@
 <template>
   <div>
-    {{ $slugify('hello! mir', '-') }}
+    {{ $slugify('Оригинальный каталог') }}
   </div>
 </template>
 
 <script setup lang="ts">
 
 const { slugify } = useSlugify()
-const slug = slugify('hello, mir')
+const slug = slugify('Оригинальный каталог')
 </script>

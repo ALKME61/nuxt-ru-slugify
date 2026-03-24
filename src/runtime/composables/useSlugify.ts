@@ -1,13 +1,11 @@
 export const useSlugify = () => {
   const slugify = (text: unknown, separator?: string): string => {
     if (typeof text !== 'string') {
-      if (import.meta.env.DEV) {
-        console.warn('[ru-slugify] slugify expects a string for text, received', text)
-      }
+      if (import.meta.env.DEV) console.warn('[ru-slugify] expects string', text)
       return ''
     }
 
-    // транслитерируем кириллицу
+    // 1. Транслитерация кириллицы
     let result = text
       .toLowerCase()
       .replace(/[а-яё]/g, (char) => {
@@ -23,13 +21,18 @@ export const useSlugify = () => {
         return dict[char] || char
       })
 
-    // если separator передан — заменяем все не-буквенно-цифровые последовательности на него
+    // 2. Удаляем все символы, кроме букв, цифр и пробелов
+    result = result.replace(/[^a-z0-9\s]/g, '')
+
+    // 3. Если separator передан – заменяем последовательности пробелов и других разделителей на него
     if (separator !== undefined) {
-      result = result.replace(/[^a-z0-9]+/g, separator === '' ? '' : separator)
+      result = result.replace(/\s+/g, separator === '' ? '' : separator)
     }
 
-    // убираем начальные и конечные разделители (если они появились)
-    result = result.replace(/^-|-$/g, '')
+    // 4. Убираем начальные и конечные разделители
+    if (separator !== undefined && separator !== '') {
+      result = result.replace(new RegExp(`^${separator}+|${separator}+$`, 'g'), '')
+    }
 
     return result
   }
