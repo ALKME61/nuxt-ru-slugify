@@ -8,6 +8,7 @@ export const useSlugify = () => {
     // 1. Транслитерация кириллицы
     let result = text
       .toLowerCase()
+      // eslint-disable-next-line regexp/no-obscure-range
       .replace(/[а-яё]/g, (char) => {
         const dict: Record<string, string> = {
           'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd',
