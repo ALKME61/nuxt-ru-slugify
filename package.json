@@ -4,7 +4,7 @@
   "description": "Nuxt module for transliterating Russian text into slugs or clean Latin strings",
   "repository": {
     "type": "git",
-    "url": "https://github.com/username/nuxt-ru-slugify.git"
+    "url": "https://github.com/ALKME61/nuxt-ru-slugify.git"
   },
   "license": "MIT",
   "type": "module",
